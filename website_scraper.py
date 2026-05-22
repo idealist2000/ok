@@ -69,6 +69,30 @@ def _extract_description(soup: BeautifulSoup) -> str | None:
     return None
 
 
+_NOISE_TAGS = {"script", "style", "nav", "footer", "header", "noscript", "aside", "iframe"}
+_PAGE_TEXT_MAX = 3000
+
+
+def _extract_page_text(soup: BeautifulSoup) -> str | None:
+    clone = BeautifulSoup(str(soup), "lxml")
+    for tag in clone.find_all(_NOISE_TAGS):
+        tag.decompose()
+
+    body = clone.find("body")
+    raw = (body or clone).get_text(separator=" ", strip=True)
+
+    lines = []
+    seen = set()
+    for line in raw.split():
+        word = line.strip()
+        if word and word not in seen:
+            seen.add(word)
+            lines.append(word)
+
+    text = " ".join(lines)
+    return text[:_PAGE_TEXT_MAX] if text else None
+
+
 def scrape_website(url: str) -> dict:
     empty = {
         "emails": [],
@@ -77,6 +101,7 @@ def scrape_website(url: str) -> dict:
         "facebook": None,
         "twitter": None,
         "description": None,
+        "page_text": None,
     }
 
     if not url:
@@ -102,10 +127,8 @@ def scrape_website(url: str) -> dict:
 
     emails: set = set()
 
-    # From raw HTML text
     emails.update(_extract_emails_from_text(html))
 
-    # From mailto: links
     for a in soup.find_all("a", href=True):
         href = a["href"]
         if href.startswith("mailto:"):
@@ -116,9 +139,11 @@ def scrape_website(url: str) -> dict:
     cleaned_emails = _clean_emails(emails)
     social = _extract_social_links(soup)
     description = _extract_description(soup)
+    page_text = _extract_page_text(soup)
 
     return {
         "emails": cleaned_emails,
         **social,
         "description": description,
+        "page_text": page_text,
     }
