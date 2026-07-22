@@ -1,0 +1,576 @@
+/* =========================================================
+   Falcı Profilleri — Frontend Styles
+   Mystical dark-purple / navy theme
+   ========================================================= */
+
+:root {
+  --falci-purple:      #6a0dad;
+  --falci-purple-dark: #4a0080;
+  --falci-purple-mid:  #8b00cc;
+  --falci-navy:        #0d1b2a;
+  --falci-navy-mid:    #162032;
+  --falci-navy-light:  #1e2e42;
+  --falci-gold:        #f5c518;
+  --falci-gold-light:  #ffe066;
+  --falci-white:       #f0ecff;
+  --falci-text:        #e8e0ff;
+  --falci-text-muted:  #a89fcb;
+  --falci-border:      rgba(106, 13, 173, 0.35);
+  --falci-radius:      12px;
+  --falci-shadow:      0 4px 24px rgba(106, 13, 173, 0.25);
+  --falci-transition:  0.25s ease;
+}
+
+/* ---- Resets ---- */
+.falci-form-wrapper *,
+.falci-liste-wrapper *,
+.falci-profil-wrapper *,
+.falci-archive-hero * {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   ARCHIVE HERO
+   ========================================================= */
+.falci-archive-hero {
+  background: linear-gradient(135deg, var(--falci-navy) 0%, var(--falci-purple-dark) 100%);
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--falci-white);
+  position: relative;
+  overflow: hidden;
+}
+.falci-archive-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='1' fill='rgba(255,255,255,0.06)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.falci-archive-hero h1 { font-size: 2.4rem; margin: 10px 0 8px; }
+.falci-archive-hero p  { font-size: 1.1rem; color: var(--falci-text-muted); }
+
+/* =========================================================
+   MYSTICAL ICON / STAR
+   ========================================================= */
+.falci-mystic-icon {
+  font-size: 2.5rem;
+  color: var(--falci-gold);
+  display: block;
+  text-shadow: 0 0 18px var(--falci-gold);
+  margin-bottom: 6px;
+  animation: falci-pulse 3s ease-in-out infinite;
+}
+@keyframes falci-pulse {
+  0%, 100% { transform: scale(1);   opacity: 1; }
+  50%       { transform: scale(1.1); opacity: 0.8; }
+}
+
+/* =========================================================
+   FILTER BAR
+   ========================================================= */
+.falci-liste-wrapper { max-width: 1200px; margin: 0 auto; padding: 20px 16px 60px; }
+.falci-filtre-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+  padding: 16px 20px;
+  background: var(--falci-navy);
+  border: 1px solid var(--falci-border);
+  border-radius: var(--falci-radius);
+}
+.falci-filtre-label { color: var(--falci-gold); font-weight: 700; font-size: .9rem; white-space: nowrap; }
+.falci-filtre-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+.falci-filtre-btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--falci-border);
+  background: transparent;
+  color: var(--falci-text-muted);
+  font-size: .85rem;
+  text-decoration: none;
+  transition: var(--falci-transition);
+  cursor: pointer;
+}
+.falci-filtre-btn:hover,
+.falci-filtre-btn.active {
+  background: var(--falci-purple);
+  border-color: var(--falci-purple);
+  color: #fff;
+}
+
+/* =========================================================
+   CARD GRID
+   ========================================================= */
+.falci-grid {
+  display: grid;
+  gap: 24px;
+}
+.falci-cols-1 { grid-template-columns: 1fr; }
+.falci-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.falci-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.falci-cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 900px) {
+  .falci-cols-3, .falci-cols-4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .falci-cols-2, .falci-cols-3, .falci-cols-4 { grid-template-columns: 1fr; }
+}
+
+/* ---- Card ---- */
+.falci-kart {
+  background: linear-gradient(160deg, var(--falci-navy-mid) 0%, var(--falci-navy) 100%);
+  border: 1px solid var(--falci-border);
+  border-radius: var(--falci-radius);
+  overflow: hidden;
+  transition: transform var(--falci-transition), box-shadow var(--falci-transition);
+  display: flex;
+  flex-direction: column;
+}
+.falci-kart:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--falci-shadow);
+}
+
+.falci-kart-foto {
+  position: relative;
+  background: var(--falci-navy-light);
+  padding: 24px;
+  text-align: center;
+}
+.falci-kart-foto::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 40px;
+  background: linear-gradient(to bottom, transparent, var(--falci-navy-mid));
+}
+.falci-kart .falci-avatar {
+  width: 110px; height: 110px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--falci-purple);
+  box-shadow: 0 0 20px rgba(106,13,173,.5);
+}
+.falci-avatar-placeholder {
+  width: 110px; height: 110px;
+  border-radius: 50%;
+  background: var(--falci-navy-light);
+  border: 3px solid var(--falci-purple);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: var(--falci-gold);
+}
+
+.falci-kart-body {
+  padding: 16px 18px;
+  flex: 1;
+}
+.falci-kart-isim {
+  font-size: 1.2rem;
+  margin: 0 0 6px;
+  color: var(--falci-white);
+}
+.falci-kart-isim a { color: inherit; text-decoration: none; }
+.falci-kart-isim a:hover { color: var(--falci-gold); }
+.falci-kart-sehir, .falci-kart-deneyim, .falci-kart-ucret {
+  font-size: .85rem;
+  color: var(--falci-text-muted);
+  margin: 4px 0;
+}
+.falci-kart-tanitim {
+  font-size: .9rem;
+  color: var(--falci-text);
+  margin: 8px 0;
+  line-height: 1.5;
+}
+
+.falci-kart-etiketler { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+.falci-etiket {
+  font-size: .75rem;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: rgba(106,13,173,.35);
+  border: 1px solid var(--falci-purple);
+  color: var(--falci-text);
+  white-space: nowrap;
+}
+
+.falci-kart-footer {
+  display: flex;
+  gap: 8px;
+  padding: 12px 18px 18px;
+  border-top: 1px solid var(--falci-border);
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+.falci-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: .9rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--falci-transition);
+  border: none;
+  text-align: center;
+  flex: 1;
+}
+.falci-btn-ara {
+  background: var(--falci-purple);
+  color: #fff;
+}
+.falci-btn-ara:hover { background: var(--falci-purple-mid); color: #fff; }
+
+.falci-btn-wp {
+  background: #25d366;
+  color: #fff;
+}
+.falci-btn-wp:hover { background: #1da851; color: #fff; }
+
+.falci-btn-primary {
+  background: linear-gradient(135deg, var(--falci-purple) 0%, var(--falci-purple-mid) 100%);
+  color: #fff;
+  font-size: 1rem;
+  padding: 14px 30px;
+  width: 100%;
+  border-radius: var(--falci-radius);
+}
+.falci-btn-primary:hover { opacity: .9; }
+.falci-btn-primary:disabled { opacity: .6; cursor: not-allowed; }
+
+.falci-btn-buyuk { padding: 13px 24px; font-size: 1rem; flex: none; }
+
+/* =========================================================
+   SINGLE PROFILE PAGE
+   ========================================================= */
+.falci-profil-wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 30px 16px 80px;
+}
+
+.falci-profil-hero {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  background: linear-gradient(135deg, var(--falci-navy) 0%, var(--falci-navy-mid) 100%);
+  border: 1px solid var(--falci-border);
+  border-radius: var(--falci-radius);
+  padding: 32px;
+  margin-bottom: 32px;
+}
+@media (max-width: 640px) {
+  .falci-profil-hero { flex-direction: column; align-items: center; text-align: center; }
+}
+
+.falci-profil-avatar {
+  width: 200px; height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--falci-purple);
+  box-shadow: 0 0 30px rgba(106,13,173,.6);
+  flex-shrink: 0;
+}
+.falci-profil-avatar-placeholder {
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: var(--falci-navy-light);
+  border: 4px solid var(--falci-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  color: var(--falci-gold);
+  flex-shrink: 0;
+}
+.falci-profil-hero-info { flex: 1; }
+.falci-profil-isim {
+  font-size: 2rem;
+  color: var(--falci-white);
+  margin: 0 0 8px;
+}
+.falci-profil-tanitim {
+  color: var(--falci-text-muted);
+  font-size: 1rem;
+  margin: 0 0 14px;
+}
+.falci-profil-meta-satir {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: .9rem;
+  color: var(--falci-text-muted);
+  margin-bottom: 14px;
+}
+.falci-profil-etiketler { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.falci-profil-iletisim { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* Detail Sections */
+.falci-profil-detay { display: flex; flex-direction: column; gap: 24px; }
+.falci-profil-bolum {
+  background: var(--falci-navy-mid);
+  border: 1px solid var(--falci-border);
+  border-radius: var(--falci-radius);
+  padding: 24px;
+}
+.falci-profil-bolum h2 {
+  color: var(--falci-gold);
+  font-size: 1.3rem;
+  margin: 0 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--falci-border);
+}
+.falci-profil-biyografi {
+  color: var(--falci-text);
+  line-height: 1.8;
+  font-size: .95rem;
+}
+.falci-profil-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+.falci-profil-info-kart {
+  background: var(--falci-navy-mid);
+  border: 1px solid var(--falci-border);
+  border-radius: var(--falci-radius);
+  padding: 20px;
+}
+.falci-profil-info-kart h3 {
+  color: var(--falci-gold);
+  font-size: 1rem;
+  margin: 0 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--falci-border);
+}
+.falci-profil-info-kart ul { list-style: none; padding: 0; margin: 0; }
+.falci-profil-info-kart ul li {
+  color: var(--falci-text);
+  font-size: .9rem;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  display: flex;
+  gap: 6px;
+}
+.falci-profil-info-kart ul li:last-child { border-bottom: none; }
+.falci-iletisim-kart {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.falci-iletisim-kart p { color: var(--falci-text-muted); font-size: .85rem; margin: 0; }
+.falci-iletisim-kart .falci-btn { flex: none; justify-content: center; }
+
+/* Sticky bar (mobile) */
+.falci-sticky-bar {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 9999;
+  padding: 12px 16px;
+  background: var(--falci-navy);
+  border-top: 1px solid var(--falci-border);
+  gap: 10px;
+  box-shadow: 0 -4px 20px rgba(0,0,0,.4);
+}
+@media (max-width: 640px) {
+  .falci-sticky-bar { display: flex; }
+  .falci-sticky-bar .falci-btn { flex: 1; }
+}
+
+/* =========================================================
+   APPLICATION FORM
+   ========================================================= */
+.falci-form-wrapper {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 24px 16px 60px;
+}
+.falci-form-header {
+  text-align: center;
+  padding: 30px 20px 20px;
+  background: linear-gradient(135deg, var(--falci-navy) 0%, var(--falci-purple-dark) 100%);
+  border-radius: var(--falci-radius) var(--falci-radius) 0 0;
+  border: 1px solid var(--falci-border);
+  border-bottom: none;
+  margin-bottom: 0;
+}
+.falci-form-header h2 { color: var(--falci-white); margin: 8px 0 6px; font-size: 1.6rem; }
+.falci-form-header p  { color: var(--falci-text-muted); margin: 0; font-size: .95rem; }
+
+#falci-basvuru-form {
+  background: var(--falci-navy-mid);
+  border: 1px solid var(--falci-border);
+  border-radius: 0 0 var(--falci-radius) var(--falci-radius);
+  padding: 28px;
+}
+
+.falci-fieldset {
+  border: 1px solid var(--falci-border);
+  border-radius: 8px;
+  padding: 20px 22px 16px;
+  margin-bottom: 22px;
+  background: rgba(13,27,42,.5);
+}
+.falci-fieldset legend {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--falci-gold);
+  padding: 0 8px;
+}
+.falci-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 560px) { .falci-row { grid-template-columns: 1fr; } }
+
+.falci-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.falci-field label { font-size: .9rem; font-weight: 600; color: var(--falci-text); }
+.falci-field input[type=text],
+.falci-field input[type=number],
+.falci-field input[type=file],
+.falci-field textarea {
+  background: var(--falci-navy);
+  border: 1px solid var(--falci-border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: var(--falci-white);
+  font-size: .95rem;
+  transition: border-color var(--falci-transition);
+  width: 100%;
+}
+.falci-field input:focus,
+.falci-field textarea:focus {
+  outline: none;
+  border-color: var(--falci-purple);
+  box-shadow: 0 0 0 3px rgba(106,13,173,.2);
+}
+.falci-field textarea { resize: vertical; min-height: 90px; }
+#ff_biyografi { min-height: 160px; }
+.falci-field-note { font-size: .78rem; color: var(--falci-text-muted); }
+
+.falci-uzmanlik-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+  margin-top: 8px;
+}
+.falci-uzmanlik-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border: 1px solid var(--falci-border);
+  border-radius: 8px;
+  cursor: pointer;
+  background: var(--falci-navy);
+  color: var(--falci-text);
+  font-size: .88rem;
+  transition: var(--falci-transition);
+}
+.falci-uzmanlik-label:hover { border-color: var(--falci-purple); }
+.falci-uzmanlik-label input[type=checkbox] { accent-color: var(--falci-purple); width: 16px; height: 16px; }
+.falci-uzmanlik-label:has(input:checked) {
+  border-color: var(--falci-purple);
+  background: rgba(106,13,173,.2);
+  color: #fff;
+}
+
+.falci-char-counter { font-size: .8rem; color: var(--falci-text-muted); margin-top: 4px; }
+.falci-char-counter.ok { color: #28a745; }
+.falci-char-counter.warn { color: var(--falci-gold); }
+
+.falci-iletisim-uyari {
+  background: rgba(106,13,173,.15);
+  border: 1px solid var(--falci-purple);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+}
+.falci-iletisim-uyari p { color: var(--falci-text-muted); font-size: .88rem; margin: 0; }
+
+.falci-submit-area { text-align: center; }
+
+.req { color: #ff4d6d; }
+
+/* =========================================================
+   MESSAGES & ALERTS
+   ========================================================= */
+.falci-mesaj {
+  padding: 14px 18px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: .95rem;
+  line-height: 1.5;
+}
+.falci-mesaj-basari {
+  background: rgba(40,167,69,.15);
+  border: 1px solid #28a745;
+  color: #a3e4b0;
+}
+.falci-mesaj-hata {
+  background: rgba(220,53,69,.15);
+  border: 1px solid #dc3545;
+  color: #f5b0ba;
+}
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+.falci-bos-sonuc {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--falci-text-muted);
+}
+.falci-bos-sonuc h3 { color: var(--falci-white); margin: 12px 0 8px; }
+
+/* =========================================================
+   PAGINATION
+   ========================================================= */
+.falci-pagination {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 40px;
+}
+.falci-pagination .page-numbers {
+  padding: 8px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: .9rem;
+  color: var(--falci-text-muted);
+  border: 1px solid var(--falci-border);
+  background: var(--falci-navy-mid);
+  transition: var(--falci-transition);
+}
+.falci-pagination .page-numbers:hover,
+.falci-pagination .page-numbers.current {
+  background: var(--falci-purple);
+  color: #fff;
+  border-color: var(--falci-purple);
+}
+
+/* =========================================================
+   EMBED
+   ========================================================= */
+.falci-profil-embed { padding: 0; }
+.falci-profil-embed .falci-profil-hero { padding: 20px; }
+.falci-profil-embed .falci-profil-avatar,
+.falci-profil-embed .falci-profil-avatar-placeholder { width: 140px; height: 140px; }
